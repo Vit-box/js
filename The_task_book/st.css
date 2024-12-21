@@ -1,0 +1,73 @@
+/* Устанавливаем нулевые отступы для html и body */
+html,
+body {
+    margin: 0;
+    /* Позиционируем элемент абсолютно относительно родительского контейнера */
+    position: absolute;
+    /* Ширина блока */
+    width: 1475px;
+    /* Высота блока */
+    height: 800px;
+    /* Расположение элемента от левого края окна браузера */
+    left: 0;
+    /* Расположение элемента от верхнего края окна браузера */
+    top: 0;
+    /* Цвет фона */
+    background: #262626;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.add-task {
+        padding: 20px;
+        /* Убираем маркеры у элементов списка */
+        list-style: none;
+        /* Закругление углов */
+        border-radius: 20px;
+        color: #fbfbfb;
+        /* Белый фон */
+        background: #cc6a25;
+}
+
+/* Стили для ненумерованного списка ul */
+ul {
+    margin: 0;
+    /* Убираем маркеры у элементов списка */
+    list-style: none;
+    /* Размер шрифта */
+    font-size: 36px;
+    /* Ширина блока */
+    width: 750px;
+    /* Смещение слева */
+    left: 45px;
+    /* Смещение сверху */
+    top: 60px;
+    /* Закругление углов */
+    border-radius: 20px;
+    font-weight: 700;
+    color: #fbfbfb;
+    /* Белый фон */
+    background: #cc6a25;
+}
+
+/* Стили для input полей */
+h1 {
+    
+    /* Цвет текста */
+    color: #fbfbfb;
+    /* Шрифт */
+    font-family: Inter;
+     /* Смещение слева */
+    margin-left: 45px;
+    /* Размер шрифта */
+    letter-spacing: 0%;
+    /* Выравнивание текста по левому краю */
+    text-align: left;
+    /* Закругление углов */
+    border-radius: 20px;
+}
