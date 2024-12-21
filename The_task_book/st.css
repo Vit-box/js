@@ -19,7 +19,8 @@ body {
 .flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
     align-items: start;
 }
 
@@ -52,7 +53,7 @@ ul {
     font-weight: 700;
     color: #fbfbfb;
     /* Белый фон */
-    background: #cc6a25;
+    background: #262626;
 }
 
 /* Стили для input полей */
