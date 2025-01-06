@@ -1,3 +1,14 @@
+// Чтение значения из хранилища
+let arrFromStorage = localStorage.getItem('todoList');
+let arrParsed = [];
+
+try {
+  arrParsed = arrFromStorage ? JSON.parse(arrFromStorage) : [];
+} catch (error) {
+  console.error('Ошибка парсинга значения из localStorage');
+  arrParsed = [];
+}
+
 // Функция форматирует текущую дату в формате ГГГГ-ММ-ДД
 function formatDate() {
   // Создаем объект даты, который содержит текущие дату и время
@@ -45,6 +56,12 @@ function formatDate() {
     }
   }
   let nameMonth1 = nameMonth()
+  let monthIndexToNameMap = {
+    '01': 'January',
+    '02': 'February',
+    // ...
+  }
+  let nameMonth2 = indexToNameMap[month];
   // Формируем строку в формате dd name month и возвращаем её
   return `${day} ${nameMonth1}`;
 }
@@ -64,43 +81,43 @@ const dateField = document.getElementById("dateField");
 dateField.textContent += " " + formatDate();  // Добавляем дату к существующему тексту
 */
 
-let arr = [{
-  title:'Создать Git',
-  id:1,
-  completed: false
-},
-{
-  title:'Создать LocalStorage',
-  id:2,
-  completed: false
-},
-{
-  title:'Большие отступы убрать',
-  id:3,
-  completed: false
-},
-{
-  title:'Условие на "готово" и зачеркивание',
-  id:4,
-  completed: false
-},
-{
-  title:'Позаниматься JavaScript',
-  id:5,
-  completed: false
-}
-]
+// let arr = [{
+//   title:'Создать Git',
+//   id:1,
+//   completed: false
+// },
+// {
+//   title:'Создать LocalStorage',
+//   id:2,
+//   completed: false
+// },
+// {
+//   title:'Большие отступы убрать',
+//   id:3,
+//   completed: false
+// },
+// {
+//   title:'Условие на "готово" и зачеркивание',
+//   id:4,
+//   completed: false
+// },
+// {
+//   title:'Позаниматься JavaScript',
+//   id:5,
+//   completed: false
+// }
+// ]
 
-function renderList (arr) {
+function renderList (arrParsed) {
   const ulTex = document.querySelector("#tex");
   ulTex.innerHTML = '';
-  arr.forEach((item) => {
+  arrParsed.forEach((item) => {
     ulTex.insertAdjacentHTML(
       "beforeend",
       `
         <li>
-          <label>
-            <input type="checkbox" />
+          <label onclick="completed(event, ${item.id})">
+            <input type="checkbox" ${item.completed ? 'checked' : ''} />
             <span>${item.title}</span>
           </label>
           <button onclick="onDelete(event, ${item.id})">X</button>
@@ -110,15 +127,24 @@ function renderList (arr) {
   });
 }
 
-renderList(arr);
+renderList(arrParsed);
+
+function completed(event, id) {
+  let index = arrParsed.findIndex(item => item.id === id);
+  arrParsed[index].completed = !arrParsed[index].completed;
+  localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+}
+
+
 
 /**
   Функция для обработки события удаления элемента списка.
   param {Event} event - Событие, которое произошло при клике на кнопку "X".
  */
 function onDelete(event, id) {
-  arr = arr.filter(item => item.id !== id);
-    renderList(arr);
+  arrParsed = arrParsed.filter(item => item.id !== id);
+    localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+    renderList(arrParsed);
 }
 
 //trim() - убирает пробелы с краев.
@@ -126,7 +152,7 @@ function onDelete(event, id) {
 function addNewTask() {
   const input = document.getElementById("newTaskInput");
   const taskTitle = input.value.trim();
-  const nextId = arr[arr.length -1].id +1;
+  const nextId = arrParsed.length ? arrParsed[arrParsed.length - 1].id + 1 : 1;
   if (taskTitle) {
     const newItem = {
       title: taskTitle,
@@ -134,8 +160,9 @@ function addNewTask() {
       completed: false
     };
 
-    arr.push(newItem); // Добавляем новую задачу в массив
-    renderList(arr); // Отображаем новую задачу в списке
+    arrParsed.push(newItem); // Добавляем новую задачу в массив
+    localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+    renderList(arrParsed); // Отображаем новую задачу в списке
     input.value = ''; // Очищаем поле ввода
   }
 }
