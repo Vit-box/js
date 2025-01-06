@@ -117,19 +117,10 @@ renderList(arr);
   param {Event} event - Событие, которое произошло при клике на кнопку "X".
  */
 function onDelete(event, id) {
-  // Находим ближайший родительский элемент <li> относительно кнопки, которую нажали
-  // const itemToRemove = event.target.closest('li');
-  // Проверяем, существует ли такой элемент
-  // if (itemToRemove) {
-    // Удаляем элемент из DOM
-    // itemToRemove.remove();
-    // Извлекаем ID удаленного элемента из атрибута data-id
-    // const idToRemove = parseInt(itemToRemove.dataset.id);
-    // Фильтруем массив arr, оставляя все элементы, кроме того, чей id совпадает с idToRemove
-    arr = arr.filter(item => item.id !== id);
+  arr = arr.filter(item => item.id !== id);
     renderList(arr);
-  // }
 }
+
 //trim() - убирает пробелы с краев.
 // Функция добавляет новую задачу в список
 function addNewTask() {
@@ -148,3 +139,21 @@ function addNewTask() {
     input.value = ''; // Очищаем поле ввода
   }
 }
+
+// // Получаем все элементы списка
+// const texD = document.querySelectorAll("label");
+// // Добавляем обработчики событий ко всем элементам списка
+// texD.forEach((item) => {
+//   item.addEventListener("click", () => {
+//     const input = item.firstElementChild;
+//     const span = item.lastElementChild;
+
+//     // Если текст уже зачеркнут, убираем зачеркивание
+//     if (input.checked) {
+//       span.style.textDecoration = "line-through";
+//     } else {
+//       // Иначе добавляем зачеркивание
+//       span.style.textDecoration = "none";
+//     }
+//   });
+// });

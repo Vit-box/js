@@ -72,3 +72,7 @@ h1 {
     /* Закругление углов */
     border-radius: 20px;
 }
+
+input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+}
