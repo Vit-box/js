@@ -19,7 +19,7 @@
             </ul>
         </div>
         <div class="add-task">
-            <input type="text" id="newTaskInput" placeholder="Введите новое задание..."/>
+            <input type="text" id="newTaskInput" onkeydown="addNewEnterTask(event)" placeholder="Введите новое задание..."/>
             <button onclick="addNewTask()">Добавить</button>
         </div>
     </div>
