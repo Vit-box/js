@@ -76,3 +76,9 @@ h1 {
 input[type="checkbox"]:checked + span {
     text-decoration: line-through;
 }
+
+.page_2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
