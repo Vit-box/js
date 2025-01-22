@@ -231,6 +231,11 @@ function addNewEnterTask(event) {
   }
 }
 
+checkbox.onchange = function () {
+  task.completed = this.checked;
+  localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+};
+
 // // Получаем все элементы списка
 // const texD = document.querySelectorAll("label");
 // // Добавляем обработчики событий ко всем элементам списка
@@ -248,3 +253,5 @@ function addNewEnterTask(event) {
 //     }
 //   });
 // });
+
+
