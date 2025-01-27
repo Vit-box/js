@@ -18,47 +18,6 @@ function formatDate() {
   // Получаем месяц (начиная с нуля, поэтому прибавляем 1), преобразуем его в строку и добавляем ведущий ноль, если число меньше 10
   let month = String(date.getMonth() + 1).padStart(2, '0');
 
-  function nameMonth() {
-    if (month === '01') {
-      return 'January'
-    }
-    else if (month === '02') {
-      return 'February'
-    }
-    else if (month === '03') {
-      return 'March'
-    }
-    else if (month === '04') {
-      return 'April'
-    }
-    else if (month === '05') {
-      return 'May'
-    }
-    else if (month === '06') {
-      return 'June'
-    }
-    else if (month === '07') {
-      return 'July'
-    }
-    else if (month === '08') {
-      return 'August'
-    }
-    else if (month === '09') {
-      return 'September'
-    }
-    else if (month === '10') {
-      return 'October'
-    }
-    else if (month === '11') {
-      return 'November'
-    }
-    else {
-      return 'December'
-    }
-  }
-
-  let nameMonth1 = nameMonth()
-
 
   let monthIndexToNameMap = {
     '01': 'January',
@@ -76,14 +35,12 @@ function formatDate() {
   }
   let nameMonth2 = monthIndexToNameMap[month];
 
-
   // Формируем строку в формате dd name month и возвращаем её
   return `${day} ${nameMonth2}`;
 }
 
 let dateField = document.getElementById("dateField");
 dateField.textContent += " " + formatDate();  // Добавляем дату к существующему тексту
-
 
 /*
 // Функция форматирует текущую дату в формате ДД Месяц
@@ -96,33 +53,36 @@ const dateField = document.getElementById("dateField");
 dateField.textContent += " " + formatDate();  // Добавляем дату к существующему тексту
 */
 
-// let arr = [{
-//   title:'Создать Git',
-//   id:1,
-//   completed: false
-// },
-// {
-//   title:'Создать LocalStorage',
-//   id:2,
-//   completed: false
-// },
-// {
-//   title:'Большие отступы убрать',
-//   id:3,
-//   completed: false
-// },
-// {
-//   title:'Условие на "готово" и зачеркивание',
-//   id:4,
-//   completed: false
-// },
-// {
-//   title:'Позаниматься JavaScript',
-//   id:5,
-//   completed: false
-// }
-// ]
+// let arr = [
+//   {
+//     title:'Создать Git',
+//     id:1,
+//     completed: false
+//   },
+//   {
+//     title:'Создать LocalStorage',
+//     id:2,
+//     completed: false
+//   },
+//   {
+//     title:'Большие отступы убрать',
+//     id:3,
+//     completed: false
+//   },
+//   {
+//     title:'Условие на "готово" и зачеркивание',
+//     id:4,
+//     completed: false
+//   },
+//   {
+//     title:'Позаниматься JavaScript',
+//     id:5,
+//     // completed: true,
+//     datesCompleted: ['19.01.2025', '22.01.2025']
+//   }
+// ];
 
+//Рендер списка
 function renderList (arrParsed) {
   const ulTex = document.querySelector("#tex");
   ulTex.innerHTML = '';
@@ -131,8 +91,9 @@ function renderList (arrParsed) {
       "beforeend",
       `
         <li>
-          <label onclick="completed(event, ${item.id})">
-            <input type="checkbox" ${item.completed ? 'checked' : ''} />
+        <input type="radio" />
+          <label>
+            <input type="checkbox" ${item.completed ? 'checked' : ''} onchange="completed(event, ${item.id})" />
             <span>${item.title}</span>
           </label>
           <button onclick="onDelete(event, ${item.id})">X</button>
@@ -182,23 +143,11 @@ function renderList (arrParsed) {
 renderList(arrParsed);
 
 function completed(event, id) {
-  console.log(event);
+  console.log('completed', event, event.target.value);
 
   let index = arrParsed.findIndex(item => item.id === id);
-  arrParsed[index].completed = !arrParsed[index].completed;
-  localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
-}
-
-
-
-/**
-  Функция для обработки события удаления элемента списка.
-  param {Event} event - Событие, которое произошло при клике на кнопку "X".
- */
-function onDelete(event, id) {
-  arrParsed = arrParsed.filter(item => item.id !== id);
-    localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
-    renderList(arrParsed);
+  arrParsed[index].completed = event.target.value;
+  localStorage.setItem('todoList', JSON.stringify(arrParsed)); // Запись значения
 }
 
 //trim() - убирает пробелы с краев.
@@ -211,9 +160,9 @@ function addNewTask() {
     const newItem = {
       title: taskTitle,
       id: nextId,
-      completed: false
+      completed: false,
+      datesCompleted: []
     };
-
     arrParsed.push(newItem); // Добавляем новую задачу в массив
     localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
     renderList(arrParsed); // Отображаем новую задачу в списке
@@ -231,10 +180,23 @@ function addNewEnterTask(event) {
   }
 }
 
-checkbox.onchange = function () {
-  task.completed = this.checked;
-  localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
-};
+/**
+  Функция для обработки события удаления элемента списка.
+  param {Event} event - Событие, которое произошло при клике на кнопку "X".
+ */
+function onDelete(event, id) {
+  arrParsed = arrParsed.filter(item => item.id !== id);
+    localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+    renderList(arrParsed);
+}
+
+
+
+
+// checkbox.onchange = function () {
+//   task.completed = this.checked;
+//   localStorage.setItem('todoList', JSON.stringify(arrParsed));// Запись значения
+// };
 
 // // Получаем все элементы списка
 // const texD = document.querySelectorAll("label");
@@ -255,3 +217,37 @@ checkbox.onchange = function () {
 // });
 
 
+
+// 1. Создать генератр дат.
+// 2. Добавить в объект дополнительное свойство массив, в котором будет список дат или одна дата выполнения.
+// 3. Создать зависимость, что при каждом выполнении (зачеркивании) задачи, добавлялась в массив сегодняшняя дата.
+// 4. Создать зависимость, что при каждой отмене выполнения задачи, удалялась из массива сегодняшняя дата.
+
+//1.
+function currentDate() {
+  // Получаем текущую дату
+  let currentDate = new Date();
+  // Получаем год, месяц и день
+  let year = currentDate.getFullYear();
+  let month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0, поэтому добавляем 1 и дополняем до двух знаков нулями
+  let day = String(currentDate.getDate()).padStart(2, '0');
+  // Собираем дату в формате ДД.ММ.ГГГГ
+  let formattedDate = `${year}-${month}-${day}`;
+  return formattedDate
+}
+
+
+const myObject = {
+  myArray: ['2025-01-28']
+};
+// Добавляем новый элемент в массив
+myObject.myArray.push(currentDate());
+
+console.log(myObject.myArray); // ['новое значение']
+
+
+//2. +
+//3.
+if (datesCompleted) {
+  arrParsed
+}
