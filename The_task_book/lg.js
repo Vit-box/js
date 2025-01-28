@@ -223,31 +223,20 @@ function onDelete(event, id) {
 // 3. Создать зависимость, что при каждом выполнении (зачеркивании) задачи, добавлялась в массив сегодняшняя дата.
 // 4. Создать зависимость, что при каждой отмене выполнения задачи, удалялась из массива сегодняшняя дата.
 
-//1.
-function currentDate() {
-  // Получаем текущую дату
-  let currentDate = new Date();
+//1,2,3:
+// Функция для проверки наличия текущей даты в массиве и добавления ее при отсутствии
+function checkAndAddDate(obj) {
+  const today = new Date(); // Текущая дата
   // Получаем год, месяц и день
-  let year = currentDate.getFullYear();
-  let month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0, поэтому добавляем 1 и дополняем до двух знаков нулями
-  let day = String(currentDate.getDate()).padStart(2, '0');
+  let year = today.getFullYear();
+  let month = String(today.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0, поэтому добавляем 1 и дополняем до двух знаков нулями
+  let day = String(today.getDate()).padStart(2, '0');
   // Собираем дату в формате ДД.ММ.ГГГГ
-  let formattedDate = `${year}-${month}-${day}`;
-  return formattedDate
+  let dateString = `${year}-${month}-${day}`;
+  // Проверка, есть ли такая дата в массиве
+  if (!obj.myArray.includes(dateString)) {
+      obj.myArray.push(dateString); // Если нет, добавляем
+  return obj.myArray
+  }
 }
 
-
-const myObject = {
-  myArray: ['2025-01-28']
-};
-// Добавляем новый элемент в массив
-myObject.myArray.push(currentDate());
-
-console.log(myObject.myArray); // ['новое значение']
-
-
-//2. +
-//3.
-if (datesCompleted) {
-  arrParsed
-}
