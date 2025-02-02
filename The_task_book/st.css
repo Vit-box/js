@@ -5,15 +5,19 @@ body {
     /* Позиционируем элемент абсолютно относительно родительского контейнера */
     position: absolute;
     /* Ширина блока */
-    width: 1475px;
+    width: 100%;
     /* Высота блока */
-    height: 800px;
+    height: 100%;
     /* Расположение элемента от левого края окна браузера */
     left: 0;
     /* Расположение элемента от верхнего края окна браузера */
     top: 0;
     /* Цвет фона */
     background: #262626;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .flex {
@@ -83,6 +87,7 @@ input[type="checkbox"]:checked + span {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    padding-bottom: 40px;
 }
 
 

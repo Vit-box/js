@@ -7,25 +7,28 @@
     <link rel="stylesheet" href="st.css" />
 </head>
 <body>
-    <h1 id="dateField">Plan for</h1>
-    <div class="flex">
-        <div class="date">
-            <ul id="tex">
-                <!-- <li><label><input type="checkbox"/><span>Медитация</span></label> <button>X</button></li>
-                <li><label><input type="checkbox"/><span>Почитать книгу</span></label> <button>X</button></li>
-                <li><label><input type="checkbox"/><span>Почистить зубы</span></label> <button>X</button></li>
-                <li><label><input type="checkbox"/><span>Приготовить обед</span></label> <button>X</button></li>
-                <li><label><input type="checkbox"/><span>Позаниматься JavaScript</span></label> <button>X</button></li> -->
-            </ul>
-        </div>
-        <div class="add-task">
-            <input type="text" id="newTaskInput" onkeydown="addNewEnterTask(event)" placeholder="Введите новое задание..."/>
-            <button onclick="addNewTask()">Добавить</button>
+    <div>
+        <h1 id="dateField">Plan for</h1>
+        <div class="flex">
+            <div class="date">
+                <ul id="tex">
+                    <!-- <li><label><input type="checkbox"/><span>Медитация</span></label> <button>X</button></li>
+                    <li><label><input type="checkbox"/><span>Почитать книгу</span></label> <button>X</button></li>
+                    <li><label><input type="checkbox"/><span>Почистить зубы</span></label> <button>X</button></li>
+                    <li><label><input type="checkbox"/><span>Приготовить обед</span></label> <button>X</button></li>
+                    <li><label><input type="checkbox"/><span>Позаниматься JavaScript</span></label> <button>X</button></li> -->
+                </ul>
+            </div>
+            <div class="add-task">
+                <input type="text" id="newTaskInput" onkeydown="addNewEnterTask(event)" placeholder="Введите новое задание..."/>
+                <button onclick="addNewTask()">Добавить</button>
+            </div>
         </div>
     </div>
     <div class="page_2">
         <a href="index2.html">Перейти на вторую страницу</a>
     </div>
+    <script src="shared.js"></script>
     <script src="lg.js"></script>
 </body>
 </html>
