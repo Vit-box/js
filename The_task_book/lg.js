@@ -4,10 +4,22 @@ let arrParsed = [];
 
 try {
   arrParsed = arrFromStorage ? JSON.parse(arrFromStorage) : [];
+  arrParsed.forEach((item) => {
+    if (!item.datesCompleted) {
+      item.datesCompleted = [];
+    }
+    if ('completed' in item) {
+      delete item.completed
+    }
+  })
 } catch (error) {
   console.error('Ошибка парсинга значения из localStorage');
   arrParsed = [];
 }
+
+// ISO - YYYY-MM-DDTHH:mm:ss.sssZ
+const today = new Date().toISOString().slice(0, 10)
+
 
 // Функция форматирует текущую дату в формате ГГГГ-ММ-ДД
 function formatDate() {
@@ -17,8 +29,6 @@ function formatDate() {
   let day = String(date.getDate()).padStart(2, '0');
   // Получаем месяц (начиная с нуля, поэтому прибавляем 1), преобразуем его в строку и добавляем ведущий ноль, если число меньше 10
   let month = String(date.getMonth() + 1).padStart(2, '0');
-
-
   let monthIndexToNameMap = {
     '01': 'January',
     '02': 'February',
@@ -34,7 +44,6 @@ function formatDate() {
     '12': 'December'
   }
   let nameMonth2 = monthIndexToNameMap[month];
-
   // Формируем строку в формате dd name month и возвращаем её
   return `${day} ${nameMonth2}`;
 }
@@ -82,6 +91,14 @@ dateField.textContent += " " + formatDate();  // Добавляем дату к 
 //   }
 // ];
 
+function checkDatesComplited (datesCompleted) {
+  if (datesCompleted.includes(today) ) {
+    return true
+  }
+}
+
+
+
 //Рендер списка
 function renderList (arrParsed) {
   const ulTex = document.querySelector("#tex");
@@ -91,9 +108,8 @@ function renderList (arrParsed) {
       "beforeend",
       `
         <li>
-        <input type="radio" />
           <label>
-            <input type="checkbox" ${item.completed ? 'checked' : ''} onchange="completed(event, ${item.id})" />
+            <input type="checkbox" ${checkDatesComplited(item.datesCompleted) ? 'checked' : ''} onchange="completed(event, ${item.id})" />
             <span>${item.title}</span>
           </label>
           <button onclick="onDelete(event, ${item.id})">X</button>
@@ -142,13 +158,23 @@ function renderList (arrParsed) {
 
 renderList(arrParsed);
 
-function completed(event, id) {
-  console.log('completed', event, event.target.value);
 
+
+function completed(event, id) {
+  console.log('datesCompleted', event, event.target.checked);
+  // console.log('completed', event, event.target.checked);
+  //В какой задаче внести правки
   let index = arrParsed.findIndex(item => item.id === id);
-  arrParsed[index].completed = event.target.value;
+  if (event.target.checked === true) {
+    arrParsed[index].datesCompleted.push(today)
+  }
+  else {
+    arrParsed[index].datesCompleted = arrParsed[index].datesCompleted.filter(item => item !== today)
+  }
+  // arrParsed[index].completed = event.target.checked;
   localStorage.setItem('todoList', JSON.stringify(arrParsed)); // Запись значения
 }
+
 
 //trim() - убирает пробелы с краев.
 // Функция добавляет новую задачу в список
@@ -160,7 +186,6 @@ function addNewTask() {
     const newItem = {
       title: taskTitle,
       id: nextId,
-      completed: false,
       datesCompleted: []
     };
     arrParsed.push(newItem); // Добавляем новую задачу в массив
@@ -215,28 +240,4 @@ function onDelete(event, id) {
 //     }
 //   });
 // });
-
-
-
-// 1. Создать генератр дат.
-// 2. Добавить в объект дополнительное свойство массив, в котором будет список дат или одна дата выполнения.
-// 3. Создать зависимость, что при каждом выполнении (зачеркивании) задачи, добавлялась в массив сегодняшняя дата.
-// 4. Создать зависимость, что при каждой отмене выполнения задачи, удалялась из массива сегодняшняя дата.
-
-//1,2,3:
-// Функция для проверки наличия текущей даты в массиве и добавления ее при отсутствии
-function checkAndAddDate(obj) {
-  const today = new Date(); // Текущая дата
-  // Получаем год, месяц и день
-  let year = today.getFullYear();
-  let month = String(today.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0, поэтому добавляем 1 и дополняем до двух знаков нулями
-  let day = String(today.getDate()).padStart(2, '0');
-  // Собираем дату в формате ДД.ММ.ГГГГ
-  let dateString = `${year}-${month}-${day}`;
-  // Проверка, есть ли такая дата в массиве
-  if (!obj.myArray.includes(dateString)) {
-      obj.myArray.push(dateString); // Если нет, добавляем
-  return obj.myArray
-  }
-}
 
