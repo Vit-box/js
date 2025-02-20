@@ -15,4 +15,7 @@ try {
 } catch (error) {
   console.error('Ошибка парсинга значения из localStorage');
   arrParsed = [];
-}
+};
+
+// ISO - YYYY-MM-DDTHH:mm:ss.sssZ
+const today = new Date().toISOString().slice(0, 10);

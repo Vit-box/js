@@ -19,9 +19,31 @@
                     <li><label><input type="checkbox"/><span>Позаниматься JavaScript</span></label> <button>X</button></li> -->
                 </ul>
             </div>
-            <div class="add-task">
-                <input type="text" id="newTaskInput" onkeydown="addNewEnterTask(event)" placeholder="Введите новое задание..."/>
-                <button onclick="addNewTask()">Добавить</button>
+            <div class="right-container">
+                <div class="add-task">
+                    <input type="text" id="newTaskInput" onkeydown="addNewEnterTask(event)" placeholder="Введите новое задание..."/>
+                    <button onclick="addNewTask()">Добавить</button>
+                </div>
+
+                <div class="taskWidgetProgressRing">
+                    <svg class="taskWidgetProgressRing__svg" width="130" height="130">
+                      <circle
+                        class="taskWidgetProgressRing__background"
+                        cx="65"
+                        cy="65"
+                        r="57"
+                        stroke-width="16"
+                      />
+                      <circle
+                        class="taskWidgetProgressRing__circle"
+                        cx="65"
+                        cy="65"
+                        r="57"
+                        stroke-width="16"
+                      />
+                    </svg>
+                    <div class="taskWidgetProgressRing__text"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -47,7 +47,7 @@ ul {
     /* Размер шрифта */
     font-size: 36px;
     /* Ширина блока */
-    width: 750px;
+    width: 450px;
     /* Смещение слева */
     left: 45px;
     /* Смещение сверху */
@@ -90,19 +90,47 @@ input[type="checkbox"]:checked + span {
     padding-bottom: 40px;
 }
 
+.right-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-.progress-bar {
+
+.taskWidgetProgressRing {
+    position: relative;
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: 
-    radial-gradient(closest-side, white 79%, transparent 80% 100%),
-    conic-gradient(#486094 45%, #262626 0);    
+    width: 130px;
+    height: 130px;
 }
 
-.progress-bar::before {
-    content: "45%";
+.taskWidgetProgressRing__svg {
+    transform: rotate(-90deg); /* чтобы кольцо начиналось сверху */
+    overflow: visible;
 }
+
+.taskWidgetProgressRing__background {
+    fill: none;
+    stroke: #484848; /* серый цвет для фона */
+}
+
+.taskWidgetProgressRing__circle {
+    fill: none; /* Убираем заливку */
+    stroke: white; /* Цвет прогресса */
+    stroke-dashoffset: 358.142; /* Начальное значение (100%) */
+    transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.taskWidgetProgressRing__text {
+    position: absolute;
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 21px;
+    color: #fff;
+    color: white;
+    text-align: center;
+}
+

@@ -17,8 +17,6 @@
 //   arrParsed = [];
 // }
 
-// ISO - YYYY-MM-DDTHH:mm:ss.sssZ
-const today = new Date().toISOString().slice(0, 10)
 
 
 // Функция форматирует текущую дату в формате ГГГГ-ММ-ДД
@@ -117,6 +115,7 @@ function renderList (arrParsed) {
       `
     );
   });
+  updateRing();
 }
 
 // -----------------------
@@ -159,7 +158,6 @@ function renderList (arrParsed) {
 renderList(arrParsed);
 
 
-
 function completed(event, id) {
   console.log('datesCompleted', event, event.target.checked);
   // console.log('completed', event, event.target.checked);
@@ -173,6 +171,7 @@ function completed(event, id) {
   }
   // arrParsed[index].completed = event.target.checked;
   localStorage.setItem('todoList', JSON.stringify(arrParsed)); // Запись значения
+  updateRing();
 }
 
 
@@ -215,7 +214,29 @@ function onDelete(event, id) {
     renderList(arrParsed);
 }
 
+function updateRing() {
+  let countCompleted = 0; // количество выполненных задач
 
+  arrParsed.forEach((item) => {
+      if (item.datesCompleted.includes(today)) {
+          countCompleted += 1
+      }
+  });
+
+  const countTasks = arrParsed.length; // количество задач всего
+  const circle = document.querySelector(".taskWidgetProgressRing__circle");
+  const text = document.querySelector(".taskWidgetProgressRing__text");
+
+  const radius = circle.r.baseVal.value; // Радиус круга
+  const circumference = 2 * Math.PI * radius; // Окружность круга
+
+  circle.style.strokeDasharray = circumference; // Устанавливаем длину линии
+  const offset =
+    circumference - (countCompleted / countTasks) * circumference; // Смещение для текущего процента
+  circle.style.strokeDashoffset = offset; // Устанавливаем смещение
+
+  text.textContent = `${Math.round((countCompleted / countTasks) * 100) || 0}%`;
+}
 
 
 // checkbox.onchange = function () {

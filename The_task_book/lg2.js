@@ -1,5 +1,4 @@
 //Рендер таблицы
-
 function renderTableHeader() {
     const tableHeader = document.querySelector("thead > tr");
     tableHeader.innerHTML = '';
@@ -51,6 +50,38 @@ function renderTableBody() {
 };
 
 renderTableBody();
+
+
+function renderCurrentStrike() {
+    let countCurrentDate = 0;
+
+    for (let i = 0; i < 180; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i); // установка даты (сегодняшняя минус i)
+        const searchDate = date.toISOString().slice(0, 10); // получили '2025-02-12'
+        const condition = arrParsed.every((item) => {
+            return item.datesCompleted.includes(searchDate);
+        })
+
+        if (condition) {
+            countCurrentDate += 1;
+        } else {
+            break;
+        }
+    };
+
+    const currentStrike = document.querySelector(".current-strike");
+    currentStrike.textContent = `${countCurrentDate} - текущий страйк`;
+}
+
+renderCurrentStrike()
+
+
+
+
+
+
+
 
 /**
  * @param datesArray - ['2025-02-12', '2025-02-01']
