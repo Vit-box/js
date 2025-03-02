@@ -134,3 +134,9 @@ input[type="checkbox"]:checked + span {
     text-align: center;
 }
 
+.week-statistics {
+    display: flex;
+    text-align: center;
+    gap: 20px;
+    color: white;
+}

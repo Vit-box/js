@@ -74,12 +74,66 @@ function renderCurrentStrike() {
     currentStrike.textContent = `${countCurrentDate} - текущий страйк`;
 }
 
-renderCurrentStrike()
+renderCurrentStrike();
+
+function renderRecordStrike() {
+    let countCurrentDate = 0;
+    let plusOne = 0
+    for (let i = 0; i < 180; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i); // установка даты (сегодняшняя минус i)
+        const searchDate = date.toISOString().slice(0, 10); // получили '2025-02-12'
+        const condition = arrParsed.every((item) => {
+            return item.datesCompleted.includes(searchDate);
+        })
+
+        if (condition) {
+            plusOne += 1;
+        } else {
+            if (plusOne > countCurrentDate) {
+                countCurrentDate = plusOne
+            }
+            plusOne = 0;
+        }
+    };
+
+    const recordStrike = document.querySelector(".record-strike");
+    recordStrike.textContent = `${countCurrentDate} - рекордный страйк`;
+};
+
+renderRecordStrike();
 
 
+function countStatistics(item) {
+    let countCurrentDate = 0;
+    for (let i = 0; i < 7; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i); // установка даты (сегодняшняя минус i)
+        const searchDate = date.toISOString().slice(0, 10); // получили '2025-02-12'
+        if (item.datesCompleted.includes(searchDate)) {
+            countCurrentDate += 1
+        }
+    }
+    return countCurrentDate
+};
 
+function renderWeekStatistics() {
+    const statistics = document.querySelector(".week-statistics"); //считывает элементы
+    arrParsed.forEach(item => {
+        const count = countStatistics(item);
+        statistics.insertAdjacentHTML(
+            "beforeend",
+            `<div>
+                <div>${Math.round(count/7*100)}%</div>
+                <div>${item.title}</div>
+                <div>${count} из 7 дней</div>
+            </div>`
+        )
+    })
 
+};
 
+renderWeekStatistics();
 
 
 
@@ -95,3 +149,10 @@ function isCompleted(datesArray, offset) {
 
     return datesArray.includes(searchDate) ? '✅' : '❌';
 }
+
+
+
+
+
+//вынести определение даты в отдельную функцию и объеденить 2 функции в одну (страйки)
+//применить стили
