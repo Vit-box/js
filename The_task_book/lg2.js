@@ -78,25 +78,25 @@ renderCurrentStrike();
 
 function renderRecordStrike() {
     let countCurrentDate = 0;
-    let plusOne = 0
-    for (let i = 0; i < 180; i++) {
-        const date = new Date();
-        date.setDate(date.getDate() - i); // установка даты (сегодняшняя минус i)
-        const searchDate = date.toISOString().slice(0, 10); // получили '2025-02-12'
+    let plusOne = 0;
+    for (let i = 0; i < 7; i++) {
+        const searchDate = currentDate(i);
+
+        // условие, что за этот день каждая задача была выполнена
         const condition = arrParsed.every((item) => {
             return item.datesCompleted.includes(searchDate);
-        })
+        });
 
         if (condition) {
             plusOne += 1;
         } else {
+            // если нашли более продолжительный страйк, то обновляем значение countCurrentDate на большее
             if (plusOne > countCurrentDate) {
                 countCurrentDate = plusOne
             }
             plusOne = 0;
         }
-    };
-
+    }
     const recordStrike = document.querySelector(".record-strike");
     recordStrike.textContent = `${countCurrentDate} - рекордный страйк`;
 };
@@ -106,14 +106,10 @@ renderRecordStrike();
 
 function countStatistics(item) {
     let countCurrentDate = 0;
-    for (let i = 0; i < 7; i++) {
-        const date = new Date();
-        date.setDate(date.getDate() - i); // установка даты (сегодняшняя минус i)
-        const searchDate = date.toISOString().slice(0, 10); // получили '2025-02-12'
+    const searchDate = currentDate()
         if (item.datesCompleted.includes(searchDate)) {
             countCurrentDate += 1
         }
-    }
     return countCurrentDate
 };
 

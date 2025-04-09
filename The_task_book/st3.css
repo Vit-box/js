@@ -1,23 +1,15 @@
 /* Устанавливаем нулевые отступы для html и body */
 html,
 body {
-    margin: 0;
-    /* Позиционируем элемент абсолютно относительно родительского контейнера */
-    position: absolute;
-    /* Ширина блока */
-    width: 100%;
-    /* Высота блока */
-    height: 100%;
-    /* Расположение элемента от левого края окна браузера */
-    left: 0;
-    /* Расположение элемента от верхнего края окна браузера */
-    top: 0;
-    /* Цвет фона */
-    background: #201e1e;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Устанавливаем шрифт для всего документа */
+    background-color: #121212; /* Темный фон для всей страницы */
+    color: #e0e0e0; /* Светлый цвет текста для контраста */
+    margin: 0; /* Убираем внешние отступы */
+    padding: 20px; /* Внутренний отступ для контента */
+    display: flex; /* Используем flexbox для центрирования */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    min-height: 100vh; /* Минимальная высота равна высоте экрана */
 }
 
 .flex {
@@ -28,15 +20,14 @@ body {
     align-items: start;
 }
 
-.add-task {
-        padding: 20px;
-        /* Убираем маркеры у элементов списка */
-        list-style: none;
-        /* Закругление углов */
-        border-radius: 20px;
-        color: #fbfbfb;
-        /* Белый фон */
-        background: #3E6868;
+.add-task input {
+    flex: 1; /* Растягиваем поле ввода на всю доступную ширину */
+    padding: 10px; /* Внутренний отступ */
+    border: 1px solid #333; /* Темная граница */
+    border-radius: 5px; /* Закругленные углы */
+    font-size: 1rem; /* Размер текста */
+    background: #333; /* Темный фон для поля ввода */
+    color: #e0e0e0; /* Светлый цвет текста */
 }
 
 /* Стили для ненумерованного списка ul */
@@ -60,24 +51,11 @@ ul {
     background: #201e1e;
 }
 
-/* Стили для input полей */
 h1 {
-    
-    /* Цвет текста */
-    color: #C94E44;
-    /* Шрифт */
-    font-family: Inter;
-     /* Смещение слева */
-    margin-left: 45px;
-    /* Размер шрифта */
-    letter-spacing: 0%;
-    /* Выравнивание текста по левому краю */
-    text-align: left;
-    /* Закругление углов */
-    border-radius: 20px;
+    font-size: 2.5rem; /* Размер заголовка */
+    color: #ffffff; /* Белый цвет для заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
 }
-
-
 
 input[type="checkbox"]:checked + span {
     text-decoration: line-through;
@@ -95,7 +73,6 @@ input[type="checkbox"]:checked + span {
     flex-direction: column;
     gap: 20px;
 }
-
 
 .taskWidgetProgressRing {
     position: relative;

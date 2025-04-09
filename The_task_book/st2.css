@@ -1,0 +1,229 @@
+/* Основные стили для темной темы */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Устанавливаем шрифт для всего документа */
+    background-color: #121212; /* Темный фон для всей страницы */
+    color: #e0e0e0; /* Светлый цвет текста для контраста */
+    margin: 0; /* Убираем внешние отступы */
+    padding: 20px; /* Внутренний отступ для контента */
+    display: flex; /* Используем flexbox для центрирования */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    min-height: 100vh; /* Минимальная высота равна высоте экрана */
+}
+
+h1 {
+    font-size: 2.5rem; /* Размер заголовка */
+    color: #ffffff; /* Белый цвет для заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.flex {
+    display: flex; /* Используем flexbox для расположения элементов */
+    gap: 20px; /* Расстояние между элементами */
+    max-width: 1000px; /* Максимальная ширина контейнера */
+    width: 100%; /* Ширина на всю доступную область */
+}
+
+.date, .right-container, .current-strike, .record-strike, .week-statistics {
+    background: #1e1e1e; /* Темный фон для блоков */
+    padding: 20px; /* Внутренний отступ */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень для блоков */
+}
+
+.add-task {
+    display: flex; /* Используем flexbox для расположения элементов */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.add-task input {
+    flex: 1; /* Растягиваем поле ввода на всю доступную ширину */
+    padding: 10px; /* Внутренний отступ */
+    border: 1px solid #333; /* Темная граница */
+    border-radius: 5px; /* Закругленные углы */
+    font-size: 1rem; /* Размер текста */
+    background: #333; /* Темный фон для поля ввода */
+    color: #e0e0e0; /* Светлый цвет текста */
+}
+
+.add-task button {
+    padding: 10px 20px; /* Внутренний отступ */
+    background-color: #007bff; /* Синий цвет кнопки */
+    color: white; /* Белый текст */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Курсор в виде указателя */
+    font-size: 1rem; /* Размер текста */
+}
+
+.add-task button:hover {
+    background-color: #0056b3; /* Темно-синий цвет при наведении */
+}
+
+ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренний отступ */
+}
+
+li {
+    display: flex; /* Используем flexbox для расположения элементов */
+    justify-content: space-between; /* Распределяем элементы по ширине */
+    align-items: center; /* Выравниваем по центру */
+    padding: 10px; /* Внутренний отступ */
+    border-bottom: 1px solid #333; /* Темная граница снизу */
+}
+
+li:last-child {
+    border-bottom: none; /* Убираем границу у последнего элемента */
+}
+
+li label {
+    display: flex; /* Используем flexbox для расположения элементов */
+    align-items: center; /* Выравниваем по центру */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+li input[type="checkbox"] {
+    width: 20px; /* Ширина чекбокса */
+    height: 20px; /* Высота чекбокса */
+    accent-color: #C1AB85; /* Цвет чекбокса */
+}
+
+li button {
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границу */
+    color: #ff4d4d; /* Красный цвет текста */
+    cursor: pointer; /* Курсор в виде указателя */
+    font-size: 1rem; /* Размер текста */
+}
+
+li button:hover {
+    color: #cc0000; /* Темно-красный цвет при наведении */
+}
+
+.taskWidgetProgressRing {
+    position: relative; /* Относительное позиционирование */
+    width: 130px; /* Ширина */
+    height: 130px; /* Высота */
+    margin: 0 auto; /* Центрирование */
+}
+
+.taskWidgetProgressRing__svg {
+    transform: rotate(-90deg); /* Поворачиваем SVG для правильного отображения прогресса */
+}
+
+.taskWidgetProgressRing__background {
+    stroke: #333; /* Темный цвет фона круга */
+    fill: none; /* Убираем заливку */
+}
+
+.taskWidgetProgressRing__circle {
+    stroke: #007bff; /* Синий цвет круга прогресса */
+    fill: none; /* Убираем заливку */
+    stroke-dasharray: 358; /* Длина штрихов */
+    stroke-dashoffset: 358; /* Смещение штрихов */
+    transition: stroke-dashoffset 0.5s; /* Плавное изменение */
+}
+
+.taskWidgetProgressRing__text {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Позиционирование по вертикали */
+    left: 50%; /* Позиционирование по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование */
+    font-size: 1.5rem; /* Размер текста */
+    color: #e0e0e0; /* Светлый цвет текста */
+}
+
+.page_2 {
+    margin-top: 20px; /* Отступ сверху */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.page_2 a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #C1AB85; /* Синий цвет ссылки */
+    font-size: 1rem; /* Размер текста */
+}
+
+.page_2 a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Стили для таблицы на второй странице */
+table {
+    width: 100%; /* Ширина таблицы */
+    max-width: 1000px; /* Максимальная ширина */
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    background: #1e1e1e; /* Темный фон */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень */
+    margin-bottom: 20px; /* Отступ снизу */
+    overflow: hidden; /* Скрываем выходящие за пределы элементы */
+}
+
+th, td {
+    padding: 15px; /* Внутренний отступ */
+    text-align: center; /* Выравнивание текста по центру */
+    border: 1px solid #333; /* Границы между ячейками */
+}
+
+th {
+    background-color: #C1AB85; /* Синий фон для заголовков */
+    color: white; /* Белый текст */
+    font-weight: bold; /* Жирный шрифт */
+    border-bottom: 2px solid #C1AB85; /* Более толстая граница снизу */
+}
+
+td {
+    color: #e0e0e0; /* Светлый цвет текста */
+}
+
+/* Полосатая раскраска строк (zebra-striping) */
+tr:nth-child(even) {
+    background-color: #1e1e1e; /* Темный фон для четных строк */
+}
+
+tr:nth-child(odd) {
+    background-color: #1e1e1e; /* Темный фон для нечетных строк */
+}
+
+tr:hover {
+    background-color: #333; /* Темный фон при наведении */
+}
+
+/* Стили для первой колонки (названия задач) */
+td:first-child {
+    font-weight: bold; /* Жирный шрифт для первой колонки */
+    color: #C1AB85; /* Синий цвет текста */
+}
+
+/* Стили для ячеек с отметками "X" */
+td:not(:first-child) {
+    color: #e0e0e0; /* Светлый цвет текста */
+    font-weight: normal; /* Обычный шрифт */
+}
+
+.current-strike, .record-strike, .week-statistics {
+    background: #1e1e1e; /* Темный фон */
+    padding: 15px; /* Внутренний отступ */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень */
+    margin-bottom: 20px; /* Отступ снизу */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 1.2rem; /* Размер текста */
+    color: #e0e0e0; /* Светлый цвет текста */
+}
+
+.current-strike {
+    color: #28a745; /* Синий цвет текста */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+.record-strike {
+    color: #28a745; /* Зеленый цвет текста */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+.week-statistics {
+    color: #e0e0e0; /* Светлый цвет текста */
+}
